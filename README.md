@@ -1,26 +1,50 @@
-<strong>** DO NOT DISTRIBUTE OR PUBLICLY POST SOLUTIONS TO THESE LABS. MAKE ALL FORKS OF THIS REPOSITORY WITH SOLUTION CODE PRIVATE. PLEASE REFER TO THE STUDENT CODE OF CONDUCT AND ETHICAL EXPECTATIONS FOR COLLEGE OF INFORMATION TECHNOLOGY STUDENTS FOR SPECIFICS. ** </strong>
+<h1>D287 – JAVA FRAMEWORKS</h1>
 
-# WESTERN GOVERNOR UNIVERSITY 
-## D287 – JAVA FRAMEWORKS
-Welcome to Java Frameworks! This is an opportunity for students to implement user interfaces and learn to leverage existing frameworks, assets, and content for object-oriented programming.
-FOR SPECIFIC TASK INSTRUCTIONS AND REQUIREMENTS FOR THIS ASSESSMENT, PLEASE REFER TO THE COURSE PAGE.
-## BASIC INSTRUCTIONS
-For this project, you will use the Integrated Development Environment (IDE) link in the web links section of this assessment to install the IDE, IntelliJ IDEA (Ultimate Edition). All relevant links are on the course page. Please refer to the course of study for specific links. You will sign up for a free student license using your WGU.edu email address. Please see the “IntelliJ Ultimate Edition Instructions” attachment for instructions on how do this. Next you will download the “Inventory Management Application Template Code” provided in the web links section and open it in IntelliJ IDEA (Ultimate Edition). You will upload this project to a private external GitLab repository and backup regularly. As a part of this, you have been provided with a base code (starting point). 
+<h2>Task C:</h2>
+<strong>Customize the HTML user interface for your customer’s application.<br>
+The user interface should include the shop name, the product names, and the names of the parts.</strong>
 
-## SUPPLEMENTAL RESOURCES  
-1.	How to clone a project to IntelliJ using Git?
+<section>
+    <h3>01/11/2024</h3>
+    I edited headings in mainscreen.html to represent a 3D printer shop selling parts and supplies.
 
-> Ensure that you have Git installed on your system and that IntelliJ is installed using [Toolbox](https://www.jetbrains.com/toolbox-app/). Make sure that you are using version 2022.3.2. Once this has been confirmed, click the clone button and use the 'IntelliJ IDEA (HTTPS)' button. This will open IntelliJ with a prompt to clone the proejct. Save it in a safe location for the directory and press clone. IntelliJ will prompt you for your credentials. Enter in your WGU Credentials and the project will be cloned onto your local machine.  
+        mainscreen.html Line 19: "Shop" was changed to "3D Printer Shop".
+        Before:     <h1>Parts</h1>
+        After:      <h1>3D Printer Shop</h1>
 
-2. How to create a branch and start Development?
+        mainscreen.html Line 21: "Parts" was changed to "Printer Parts".
+        Before:     <h2>Parts</h2>
+        After:      <h2>Printer Parts</h2>
 
-- GitLab method
-> Press the '+' button located near your branch name. In the dropdown list, press the 'New branch' button. This will allow you to create a name for your branch. Once the branch has been named, you can select 'Create Branch' to push the branch to your repository.
+        mainscreen.html Line 53: "Products" was changed to "Printer Kits".
+        Before:     <h2>Products</h2>
+        After:      <h2>Printer Kits</h2>
 
-- IntelliJ method
-> In IntelliJ, Go to the 'Git' button on the top toolbar. Select the new branch option and create a name for the branch. Make sure checkout branch is selected and press create. You can now add a commit message and push the new branch to the local repo.
+        mainscreen.html Line 14: "My Store" was changed to "3D Printer Shop".
+        Before:        <title>My Store
+        After:         <title>3D Printer Shop
+</section>
 
-## SUPPORT
-If you need additional support, please navigate to the course page and reach out to your course instructor.
-## FUTURE USE
-Take this opportunity to create or add to a simple resume portfolio to highlight and showcase your work for future use in career search, experience, and education!
+<section>
+<h2>Task D:</h2>
+<strong>Add an “About” page to the application to describe your chosen customer’s company to web viewers and include navigation to and from the “About” page and the main screen.</strong>
+    <h3>01/13/2024</h3>
+    I created an "about" page and made more edits in mainscreen.html.
+
+        About.html: "Our Story" section was added.
+
+        About.html: "Out Mission" section was added.
+
+        About.html: "Navigation" list was made with links to the main page
+<section/>
+
+<section>
+    <h3>01/17/2024</h3>
+    I added links to and from mainscreen.html and about.html plus controllers.
+
+        mainscreen.html Line 16: Added a link anchor for the about page
+        After: <a th:href="@{/about}" class="btn btn-primary btn-sm mb-3">About Us</a>
+
+        about.html Line 32:
+        After: <a th:href="@{/mainscreen}" class="btn btn-primary btn-sm mb-3">Return to main page</a>
+</section>
