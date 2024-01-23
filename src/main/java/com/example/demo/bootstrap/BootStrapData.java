@@ -40,8 +40,11 @@ public class BootStrapData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        if(partRepository.count() == 0 && productRepository.count() == 0){
-            OutsourcedPart powerCord= new OutsourcedPart();
+        if(partRepository.count() == 0 && productRepository.count() == 0) {
+
+            //FixMe: Why does OutsourcedPart have an ID field?
+
+            OutsourcedPart powerCord = new OutsourcedPart();
             powerCord.setCompanyName("Hong Kong Electronics");
             powerCord.setName("Power Cord");
             powerCord.setInv(5);
@@ -53,22 +56,22 @@ public class BootStrapData implements CommandLineRunner {
             blackFilament.setName("Black Filament (50ft)");
             blackFilament.setInv(5);
             blackFilament.setPrice(24.99);
-            blackFilament.setId(100L);
+            blackFilament.setId(101L);
             partRepository.save(blackFilament);
 
             InhousePart whiteFilament = new InhousePart();
             whiteFilament.setName("White Filament (50ft)");
             whiteFilament.setInv(5);
             whiteFilament.setPrice(24.99);
-            whiteFilament.setId(100L);
+            whiteFilament.setId(102L);
             partRepository.save(whiteFilament);
 
-            OutsourcedPart memoryCard= new OutsourcedPart();
+            OutsourcedPart memoryCard = new OutsourcedPart();
             memoryCard.setCompanyName("MemoryPlus");
-            memoryCard.setName("Memory card (60GB");
+            memoryCard.setName("Memory card (60GB)");
             memoryCard.setInv(5);
             memoryCard.setPrice(34.99);
-            memoryCard.setId(100L);
+            memoryCard.setId(103L);
             outsourcedPartRepository.save(memoryCard);
 
             OutsourcedPart printingBase = new OutsourcedPart();
@@ -76,11 +79,11 @@ public class BootStrapData implements CommandLineRunner {
             printingBase.setName("Printing base");
             printingBase.setInv(5);
             printingBase.setPrice(3.99);
-            printingBase.setId(100L);
+            printingBase.setId(104L);
             outsourcedPartRepository.save(printingBase);
 
-        }
-        //FixMe: what is a multi-pack?
+
+            //FixMe: what is a multi-pack?
 
        /*
         OutsourcedPart o= new OutsourcedPart();
@@ -98,21 +101,22 @@ public class BootStrapData implements CommandLineRunner {
 
         System.out.println(thePart.getCompanyName());
         */
-        List<OutsourcedPart> outsourcedParts=(List<OutsourcedPart>) outsourcedPartRepository.findAll();
-        for(OutsourcedPart part:outsourcedParts){
-            System.out.println(part.getName()+" "+part.getCompanyName());
-        }
+            List<OutsourcedPart> outsourcedParts = (List<OutsourcedPart>) outsourcedPartRepository.findAll();
+            for (OutsourcedPart part : outsourcedParts) {
+                System.out.println(part.getName() + " " + part.getCompanyName());
+            }
 
-        Product beginners = new Product("Beginner's Bargain Printer",299.99,5);
-        Product DIY= new Product("DIY Deluxe Printer",450.00,3);
-        Product weekend = new Product("Weekend Warrior Printer", 350.00, 4);
-        Product designer = new Product("Designer's Deluxe Printer", 600.00, 4);
-        Product commercial = new Product("Commercial Creations Printer", 999.99, 2);
-        productRepository.save(beginners);
-        productRepository.save(DIY);
-        productRepository.save(weekend);
-        productRepository.save(designer);
-        productRepository.save(commercial);
+            Product beginners = new Product("Beginner's Bargain Printer", 299.99, 5);
+            Product DIY = new Product("DIY Deluxe Printer", 450.00, 3);
+            Product weekend = new Product("Weekend Warrior Printer", 350.00, 4);
+            Product designer = new Product("Designer's Deluxe Printer", 600.00, 4);
+            Product commercial = new Product("Commercial Creations Printer", 999.99, 2);
+            productRepository.save(beginners);
+            productRepository.save(DIY);
+            productRepository.save(weekend);
+            productRepository.save(designer);
+            productRepository.save(commercial);
+        }
 
         /*
         Product bicycle= new Product("bicycle",100.0,15);
@@ -122,9 +126,9 @@ public class BootStrapData implements CommandLineRunner {
         */
 
         System.out.println("Started in Bootstrap");
-        System.out.println("Number of Products"+productRepository.count());
+        System.out.println("Number of Products: "+productRepository.count());
         System.out.println(productRepository.findAll());
-        System.out.println("Number of Parts"+partRepository.count());
+        System.out.println("Number of Parts: "+partRepository.count());
         System.out.println(partRepository.findAll());
 
     }

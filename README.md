@@ -4,7 +4,7 @@
 <h2>Task C:</h2>
 <strong>Customize the HTML user interface for your customer’s application.<br>
 The user interface should include the shop name, the product names, and the names of the parts.</strong><br><br>
-    I edited headings in mainscreen.html to represent a 3D printer shop selling parts and supplies.
+I edited headings in mainscreen.html to represent a 3D printer shop selling parts and supplies.
 
         mainscreen.html Line 19: "Shop" was changed to "3D Printer Shop".
         Before:     <h1>Parts</h1>
@@ -47,7 +47,7 @@ I added links to and from mainscreen.html and about.html plus controllers.
 <h2>Task E:</h2>
 <strong> Add a sample inventory appropriate for your chosen store to the application. You should have five parts and five products in your sample inventory and should not overwrite existing data in the database.
 </strong><br><br>
-I added 5 initial parts and products in BootStrapData starting at <strong>line 43<strong>
+I added 5 initial parts and products in BootStrapData starting at <strong>line 43</strong>
 
         if(partRepository.count() == 0 && productRepository.count() == 0){
                 OutsourcedPart powerCord= new OutsourcedPart();
@@ -96,4 +96,34 @@ I added 5 initial parts and products in BootStrapData starting at <strong>line 4
 •  The button should decrement the inventory of that product by one. It should not affect the inventory of any of the associated parts.<br>
 •  Display a message that indicates the success or failure of a purchase.
 </strong><br><br>
+I added a buy button for each row in the Printer Kits table
+<strong>mainscreen.html line 88:</strong>
+
+    <a th:href="@{/buyProduct(productID=${tempProduct.id})}" class="btn btn-primary btn-sm mb-3">Buy Now</a>
+
+I made HTML pages for confirmation and errors for buy requests
+
+    confirmationbuyproduct.html
+    errorbuyproduct.html
+
+A controller was needed for the "Buy Now" so I made a new class for clarity
+<strong>butProductController</strong>
+    
+    @GetMapping("/buyProduct")
+    public String buyProduct(@RequestParam("productID") int theID, Model theModel){
+        Optional<Product> productOptional = productRepository.findById((long)theID);
+
+        if(productOptional.isPresent()){
+            Product product = productOptional.get();
+            product.setInv(product.getInv() - 1);
+            productRepository.save(product);
+
+            theModel.addAttribute("product", product);
+
+            return "confirmationbuyproduct";
+        }
+        else
+            return "errorbuyproduct";
+    }
+
 </section>
