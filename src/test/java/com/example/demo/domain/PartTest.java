@@ -128,6 +128,24 @@ class PartTest {
     }
 
     @Test
+    void setMaximumInv() {
+        int maximumInv = 99999;
+        partIn.setMaxInv(maximumInv);
+        assertEquals(maximumInv,partIn.getMaxInv());
+        partOut.setMaxInv(maximumInv);
+        assertEquals(maximumInv,partOut.getMaxInv());
+    }
+
+    @Test
+    void setMinimumInv() {
+        int minimumInv = 0;
+        partIn.setMinInv(minimumInv);
+        assertEquals(minimumInv,partIn.getMinInv());
+        partOut.setMinInv(minimumInv);
+        assertEquals(minimumInv,partOut.getMinInv());
+    }
+
+    @Test
     void testToString() {
         String name="test inhouse part";
         partIn.setName(name);

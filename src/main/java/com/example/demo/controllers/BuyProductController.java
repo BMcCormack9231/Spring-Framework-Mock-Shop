@@ -16,7 +16,6 @@ public class BuyProductController {
     @Autowired
     private ProductRepository productRepository;
 
-    //FixMe: need to learn more about Model object
     @GetMapping("/buyProduct")
     public String buyProduct(@RequestParam("productID") int theID, Model theModel){
         Optional<Product> productOptional = productRepository.findById((long)theID);

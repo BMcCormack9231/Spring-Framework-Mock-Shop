@@ -202,3 +202,28 @@ I added an if statement to EnufPartsValidator that checks if the associating a p
 
 
 </section>
+<section>
+<h2>Task I:</h2>
+<strong>Add at least two unit tests for the maximum and minimum fields to the PartTest class in the test package.</strong>
+
+I added unit tests for the getters and setters of minInv and maxInv fields of the Part class.
+<strong>PartTest.Java Line 130:</strong>
+
+    @Test
+    void setMaximumInv() {
+        int maximumInv = 99999;
+        partIn.setMaxInv(maximumInv);
+        assertEquals(maximumInv,partIn.getMaxInv());
+        partOut.setMaxInv(maximumInv);
+        assertEquals(maximumInv,partOut.getMaxInv());
+    }
+
+    @Test
+    void setMinimumInv() {
+        int minimumInv = 0;
+        partIn.setMinInv(minimumInv);
+        assertEquals(minimumInv,partIn.getMinInv());
+        partOut.setMinInv(minimumInv);
+        assertEquals(minimumInv,partOut.getMinInv());
+    }
+</section>
