@@ -26,28 +26,39 @@ I edited headings in mainscreen.html to represent a 3D printer shop selling part
 <section>
 <h2>Task D:</h2>
 <strong>Add an “About” page to the application to describe your chosen customer’s company to web viewers and include navigation to and from the “About” page and the main screen.</strong><br><br>
-I created an "about" page and made more edits in mainscreen.html.
+I created an "about" page and made more edits in mainscreen.html.<br>
+<strong>About.html</strong>
 
-        About.html: "Our Story" section was added.
+        "Our Story" section was added.
 
-        About.html: "Out Mission" section was added.
+        "Out Mission" section was added.
 
-        About.html: "Navigation" list was made with links to the main page
+        "Navigation" list was made with links to the main page
 <section/>
 
-I added links to and from mainscreen.html and about.html plus controllers.
+I added links to and from mainscreen.html and about.html<br>
+<srong>mainscreen.html Line 16: Added a link anchor for the about page</strong>
 
-        mainscreen.html Line 16: Added a link anchor for the about page
-        After: <a th:href="@{/about}" class="btn btn-primary btn-sm mb-3">About Us</a>
+        <a th:href="@{/about}" class="btn btn-primary btn-sm mb-3">About Us</a>
 
-        about.html Line 32:
-        After: <a th:href="@{/mainscreen}" class="btn btn-primary btn-sm mb-3">Return to main page</a>
+<strong>about.html Line 32:</strong>
+
+        <a th:href="@{/mainscreen}" class="btn btn-primary btn-sm mb-3">Return to main page</a>
+
+The about page needed a new controller with mapping to "/about"
+<strong>MainScreenController Line 55:</strong>
+
+    @GetMapping("/about")
+    public String about(Model theModel){
+        return "about";
+    }
 
 <section>
 <h2>Task E:</h2>
 <strong> Add a sample inventory appropriate for your chosen store to the application. You should have five parts and five products in your sample inventory and should not overwrite existing data in the database.
 </strong><br><br>
-I added 5 initial parts and products in BootStrapData starting at <strong>line 43</strong>
+I added 5 initial parts and products in BootStrapData with an if statement to prevent duplicates when relaunching the app.<br>
+<strong>BootStrapData Line 43</strong>
 
         if(partRepository.count() == 0 && productRepository.count() == 0){
                 OutsourcedPart powerCord= new OutsourcedPart();
@@ -96,18 +107,18 @@ I added 5 initial parts and products in BootStrapData starting at <strong>line 4
 •  The button should decrement the inventory of that product by one. It should not affect the inventory of any of the associated parts.<br>
 •  Display a message that indicates the success or failure of a purchase.
 </strong><br><br>
-I added a buy button for each row in the Printer Kits table<br>
+I added a buy button for each row in the Printer Kits table.<br>
 <strong>mainscreen.html line 88:</strong>
 
     <a th:href="@{/buyProduct(productID=${tempProduct.id})}" class="btn btn-primary btn-sm mb-3">Buy Now</a>
 
-I made HTML pages for confirmation and errors for buy requests
+I made HTML pages for confirmation and errors for buy requests.
 
     confirmationbuyproduct.html
     errorbuyproduct.html
 
-A controller was needed for the "Buy Now" so I made a new class for clarity<br>
-<strong>BuyProductController</strong>
+A controller was needed for the "Buy Now" so I made a new class for clarity.<br>
+<strong>BuyProductController.java</strong>
     
     @GetMapping("/buyProduct")
     public String buyProduct(@RequestParam("productID") int theID, Model theModel){
@@ -198,8 +209,7 @@ I decided to remove the isValid method from Part.java and instead use if / else 
 
 I added an if statement to EnufPartsValidator that checks if the associating a part with a product would bring the available inventory of the part below the minimum allowance. 
 
-    if(p.getMinInv() > (p.getInv() - (product.getInv()) - myProduct.getInv())) return false;
-
+    if(p.getMinInv() > (p.getInv() - product.getInv())) return false;
 
 </section>
 <section>
@@ -226,4 +236,12 @@ I added unit tests for the getters and setters of minInv and maxInv fields of th
         partOut.setMinInv(minimumInv);
         assertEquals(minimumInv,partOut.getMinInv());
     }
+</section>
+<section>
+<h2>Task J:</h2>
+<strong> Remove the class files for any unused validators in order to clean your code.</strong>
+
+DeletePartValidator had no uses so I deleted the class.
+
+    DeletePartValidator.java [deleted]
 </section>
