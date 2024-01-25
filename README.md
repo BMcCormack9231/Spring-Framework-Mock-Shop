@@ -176,3 +176,29 @@ Both controllers for InhousePart and OutsourcedPart were updated with logic to d
             return "InhousePartForm";
         }
 </section>
+<section>
+<h2>Task H:</h2>
+<strong>H.  Add validation for between or at the maximum and minimum fields. The validation must include the following:<br>
+•  Display error messages for low inventory when adding and updating parts if the inventory is less than the minimum number of parts.<br>
+•  Display error messages for low inventory when adding and updating products lowers the part inventory below the minimum.<br>
+•  Display error messages when adding and updating parts if the inventory is greater than the maximum.<br>
+</strong>
+
+I decided to remove the isValid method from Part.java and instead use if / else logic to display specific error messages for low and high inventory errors
+<strong>AddInhousePartController Line 45 + AddOutsourcedPartController Line 46:</strong>
+
+    else if(part.getInv() < part.getMinInv()){
+        bindingResult.rejectValue("inv", "invalid.inventory", "Invalid inventory: value is below minimum allowance");
+        return "OutsourcedPartForm";
+    }
+    else if(part.getInv() > part.getMaxInv()){
+        bindingResult.rejectValue("inv", "invalid.inventory", "Invalid inventory: value is above maximum allowance");
+        return "OutsourcedPartForm";
+    }
+
+I added an if statement to EnufPartsValidator that checks if the associating a part with a product would bring the available inventory of the part below the minimum allowance. 
+
+    if(p.getMinInv() > (p.getInv() - (product.getInv()) - myProduct.getInv())) return false;
+
+
+</section>

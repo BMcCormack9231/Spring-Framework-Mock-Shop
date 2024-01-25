@@ -42,8 +42,12 @@ public class AddInhousePartController{
         if(theBindingResult.hasErrors()){
             return "InhousePartForm";
         }
-        if(!part.isValidInv()){
-            theBindingResult.rejectValue("inv", "invalid.inventory", "Invalid inventory: value must be between minimum and maximum");
+        else if(part.getInv() < part.getMinInv()){
+            theBindingResult.rejectValue("inv", "invalid.inventory", "Invalid inventory: value is below minimum allowance");
+            return "InhousePartForm";
+        }
+        else if(part.getInv() > part.getMaxInv()){
+            theBindingResult.rejectValue("inv", "invalid.inventory", "Invalid inventory: value is above maximum allowance");
             return "InhousePartForm";
         }
         else{
