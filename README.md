@@ -96,7 +96,7 @@ I added 5 initial parts and products in BootStrapData starting at <strong>line 4
 •  The button should decrement the inventory of that product by one. It should not affect the inventory of any of the associated parts.<br>
 •  Display a message that indicates the success or failure of a purchase.
 </strong><br><br>
-I added a buy button for each row in the Printer Kits table
+I added a buy button for each row in the Printer Kits table<br>
 <strong>mainscreen.html line 88:</strong>
 
     <a th:href="@{/buyProduct(productID=${tempProduct.id})}" class="btn btn-primary btn-sm mb-3">Buy Now</a>
@@ -106,8 +106,8 @@ I made HTML pages for confirmation and errors for buy requests
     confirmationbuyproduct.html
     errorbuyproduct.html
 
-A controller was needed for the "Buy Now" so I made a new class for clarity
-<strong>butProductController</strong>
+A controller was needed for the "Buy Now" so I made a new class for clarity<br>
+<strong>BuyProductController</strong>
     
     @GetMapping("/buyProduct")
     public String buyProduct(@RequestParam("productID") int theID, Model theModel){
@@ -126,4 +126,53 @@ A controller was needed for the "Buy Now" so I made a new class for clarity
             return "errorbuyproduct";
     }
 
+</section>
+<section>
+<h2>Task G:</h2>
+
+Modify the parts to track maximum and minimum inventory by doing the following:<br>
+•  Add additional fields to the part entity for maximum and minimum inventory.<br>
+•  Modify the sample inventory to include the maximum and minimum fields.<br>
+•  Add to the InhousePartForm and OutsourcedPartForm forms additional text inputs for the inventory so the user can set the maximum and minimum values.<br>
+•  Rename the file the persistent storage is saved to.<br>
+•  Modify the code to enforce that the inventory is between or at the minimum and maximum value.<br>
+
+
+In the Part class I added variables for maximum and minimum inventory and made getters setters and a constructor.<br>
+<strong>Part.java Line 32:</strong>
+    
+    @Min(value = 0, message = "Minimum value must be positive")
+    int minInv;
+
+    @Min(value = 0,message = "Maximum value must be positive")
+    int maxInv;
+
+I renamed the database by changing the number from 101 to 200 so the initial data could be re-populated with the new fields.<br>
+<strong>application.properties Line 6:</strong>
+    
+    spring.datasource.url=jdbc:h2:file:~/spring-boot-h2-db200
+
+Both InhousePartForm and OutsourcedPartForm had these input boxes added to the form section:<br>
+<strong>InhousePartForm Line 27 + OutsourcedPartForm Line 30:</strong>
+
+    <label for = "minInvField">Minimum Inventory</label>
+    <p><input type="text" id = "minInvField" th:field="*{minInv}" placeholder="Minimum Inventory Count" class="form-control mb-4 col-4"/></p>
+
+    <label for = "maxInvField">Maximum Inventory</label>
+    <p><input type="text" id = "maxInvField" th:field="*{maxInv}" placeholder= "Maximum Inventory count" class="form-control mb-4 col-4"/></p>
+
+I added a method to the part class to verify inventory range<br>
+<strong>Part.java Line 69:</strong>
+
+        public boolean isValidInv(){
+        return inv >= minInv && inv <= maxInv;
+    }
+
+Both controllers for InhousePart and OutsourcedPart were updated with logic to display an error message when outside the min/max range<br>
+<strong>AddInhousePartController Line 45 + AddOutsourcedPartController Line 46:</strong>
+
+    if(!part.isValidInv()){
+            theBindingResult.rejectValue("inv", "invalid.inventory", "Invalid inventory: value must be between minimum and maximum");
+            return "InhousePartForm";
+        }
 </section>

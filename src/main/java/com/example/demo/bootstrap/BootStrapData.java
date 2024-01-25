@@ -42,48 +42,56 @@ public class BootStrapData implements CommandLineRunner {
 
         if(partRepository.count() == 0 && productRepository.count() == 0) {
 
-            //FixMe: Why does OutsourcedPart have an ID field?
 
             OutsourcedPart powerCord = new OutsourcedPart();
             powerCord.setCompanyName("Hong Kong Electronics");
             powerCord.setName("Power Cord");
-            powerCord.setInv(5);
+            powerCord.setInv(550);
             powerCord.setPrice(2.99);
             powerCord.setId(100L);
+            powerCord.setMinInv(500);
+            powerCord.setMaxInv(1000);
             outsourcedPartRepository.save(powerCord);
 
             InhousePart blackFilament = new InhousePart();
             blackFilament.setName("Black Filament (50ft)");
-            blackFilament.setInv(5);
+            blackFilament.setInv(150);
             blackFilament.setPrice(24.99);
             blackFilament.setId(101L);
+            blackFilament.setMinInv(100);
+            blackFilament.setMaxInv(250);
             partRepository.save(blackFilament);
 
             InhousePart whiteFilament = new InhousePart();
             whiteFilament.setName("White Filament (50ft)");
-            whiteFilament.setInv(5);
+            whiteFilament.setInv(150);
             whiteFilament.setPrice(24.99);
             whiteFilament.setId(102L);
+            whiteFilament.setMinInv(100);
+            whiteFilament.setMaxInv(250);
             partRepository.save(whiteFilament);
 
             OutsourcedPart memoryCard = new OutsourcedPart();
             memoryCard.setCompanyName("MemoryPlus");
             memoryCard.setName("Memory card (60GB)");
-            memoryCard.setInv(5);
+            memoryCard.setInv(250);
             memoryCard.setPrice(34.99);
             memoryCard.setId(103L);
+            memoryCard.setMinInv(200);
+            memoryCard.setMaxInv(350);
             outsourcedPartRepository.save(memoryCard);
 
             OutsourcedPart printingBase = new OutsourcedPart();
             printingBase.setCompanyName("Printers Outlet");
             printingBase.setName("Printing base");
-            printingBase.setInv(5);
+            printingBase.setInv(500);
             printingBase.setPrice(3.99);
             printingBase.setId(104L);
+            printingBase.setMinInv(450);
+            printingBase.setMaxInv(650);
             outsourcedPartRepository.save(printingBase);
 
 
-            //FixMe: what is a multi-pack?
 
        /*
         OutsourcedPart o= new OutsourcedPart();

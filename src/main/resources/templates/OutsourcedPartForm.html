@@ -14,15 +14,25 @@
 <!-- Add hidden form field to handle update -->
     <p><input type="hidden" th:field="*{id}"/></p>
 
-<p><input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4"/></p>
+    <label for = "nameField">Name</label>
+<p><input type="text" id = "nameField" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4"/></p>
 
-<p><input type="text" th:field="*{price}" placeholder= "Price" class="form-control mb-4 col-4"/></p>
+    <label for = "priceField">Price</label>
+<p><input type="text" id = "priceField" th:field="*{price}" placeholder= "Price" class="form-control mb-4 col-4"/></p>
     <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</p>
 
-<p><input type="text" th:field="*{inv}" placeholder="Inventory" class="form-control mb-4 col-4"/></p>
+    <label for = "invField">Inventory</label>
+<p><input type="text" id = "invField" th:field="*{inv}" placeholder="Inventory" class="form-control mb-4 col-4"/></p>
     <p th:if="${#fields.hasErrors('inv')}" th:errors="*{inv}">Inventory Error</p>
 
-    <p><input type="text" th:field="*{companyName}" placeholder="Company Name" class="form-control mb-4 col-4"/></p>
+    <label for = "companyNameField">Company Name</label>
+    <p><input type="text" id = "companyNameField" th:field="*{companyName}" placeholder="Company Name" class="form-control mb-4 col-4"/></p>
+
+    <label for = "minInvField">Minimum Inventory</label>
+    <p><input type="text" id = "minInvField" th:field="*{minInv}" placeholder="Minimum Inventory Count" class="form-control mb-4 col-4"/></p>
+
+    <label for = "maxInvField">Maximum Inventory</label>
+    <p><input type="text" id = "maxInvField" th:field="*{maxInv}" placeholder= "Maximum Inventory count" class="form-control mb-4 col-4"/></p>
 
 <p><input type="submit" value="Submit" /></p>
 </form>
