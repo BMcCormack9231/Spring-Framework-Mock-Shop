@@ -245,3 +245,33 @@ DeletePartValidator had no uses so I deleted the class.
 
     DeletePartValidator.java [deleted]
 </section>
+<section>
+<h2>Submission 1 Revisions</h2>
+<strong>The application includes a Buy Now button.  The "Display a message that indicates the success or failure of a purchase" was not observed. The screen flickered but no message was evident.</strong>
+
+@GetMapping("/buyProduct")
+public String buyProduct(@RequestParam("productID") int theID, Model theModel){
+Optional<Product> productOptional = productRepository.findById((long)theID);
+
+        if(productOptional.isPresent()) {
+            Product product = productOptional.get();
+
+            if (product.getInv() > 0) {
+                product.setInv(product.getInv() - 1);
+                productRepository.save(product);
+
+                theModel.addAttribute("product", product);
+                System.out.println("successful purchase");
+
+                return "confirmationbuyproduct";
+            } else {
+                System.out.println("Error buying product");
+                return "errorbuyproduct";
+            }
+        }
+        else {
+            System.out.println("error buying product");
+            return "errorbuyproduct";
+        }
+    }
+</section>
