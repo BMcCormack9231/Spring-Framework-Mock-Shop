@@ -274,4 +274,6 @@ I checked each validator and confirmed they are used in the application.
     @ValidEnufParts is used in Product.java
     @ValidProductPrice is used in Product.java
     @ValidDeletePart is used in Part.java
+
+Upon completion I have rebased this branch (Buy_Now_Fix) onto working_branch
 </section>
