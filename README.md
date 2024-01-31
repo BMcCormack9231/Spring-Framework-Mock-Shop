@@ -138,6 +138,7 @@ A controller was needed for the "Buy Now" so I made a new class for clarity.<br>
     }
 
 </section>
+
 <section>
 <h2>Task G:</h2>
 
@@ -187,6 +188,7 @@ Both controllers for InhousePart and OutsourcedPart were updated with logic to d
             return "InhousePartForm";
         }
 </section>
+
 <section>
 <h2>Task H:</h2>
 <strong>H.  Add validation for between or at the maximum and minimum fields. The validation must include the following:<br>
@@ -212,6 +214,7 @@ I added an if statement to EnufPartsValidator that checks if the associating a p
     if(p.getMinInv() > (p.getInv() - product.getInv())) return false;
 
 </section>
+
 <section>
 <h2>Task I:</h2>
 <strong>Add at least two unit tests for the maximum and minimum fields to the PartTest class in the test package.</strong>
@@ -237,6 +240,7 @@ I added unit tests for the getters and setters of minInv and maxInv fields of th
         assertEquals(minimumInv,partOut.getMinInv());
     }
 </section>
+
 <section>
 <h2>Task J:</h2>
 <strong> Remove the class files for any unused validators in order to clean your code.</strong>
@@ -245,33 +249,29 @@ DeletePartValidator had no uses so I deleted the class.
 
     DeletePartValidator.java [deleted]
 </section>
+
 <section>
 <h2>Submission 1 Revisions</h2>
-<strong>The application includes a Buy Now button.  The "Display a message that indicates the success or failure of a purchase" was not observed. The screen flickered but no message was evident.</strong>
+<strong>ISSUE:<br>
+The application includes a Buy Now button.  The "Display a message that indicates the success or failure of a purchase" was not observed. The screen flickered but no message was evident.</strong>
 
-@GetMapping("/buyProduct")
-public String buyProduct(@RequestParam("productID") int theID, Model theModel){
-Optional<Product> productOptional = productRepository.findById((long)theID);
+The issue with the flickering screen involved the meta tag in the confirmation and error HTML files
 
-        if(productOptional.isPresent()) {
-            Product product = productOptional.get();
+<strong>confirmationbuyproduct.html , confirmationdeleteproduct.html , errorbuyproduct.html line 4:</strong>
 
-            if (product.getInv() > 0) {
-                product.setInv(product.getInv() - 1);
-                productRepository.save(product);
+    Before:    
+        <meta http-equiv="refresh"
+                  content="0;URL='mainscreen'">
+    After:
+        <meta http-equiv="refresh"
+                  content="25;URL='mainscreen'">
 
-                theModel.addAttribute("product", product);
-                System.out.println("successful purchase");
+<strong>ISSUE:<br>
+The README file includes notes regarding the code cleaning. At least two unused validator classes were observed.</strong>
 
-                return "confirmationbuyproduct";
-            } else {
-                System.out.println("Error buying product");
-                return "errorbuyproduct";
-            }
-        }
-        else {
-            System.out.println("error buying product");
-            return "errorbuyproduct";
-        }
-    }
+I checked each validator and confirmed they are used in the application.
+
+    @ValidEnufParts is used in Product.java
+    @ValidProductPrice is used in Product.java
+    @ValidDeletePart is used in Part.java
 </section>
